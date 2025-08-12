@@ -8,119 +8,145 @@ class PromptEngine {
         this.templates = {
             general: {
                 structure: [
-                    'Context and Role',
-                    'Task Description', 
-                    'Specific Instructions',
-                    'Output Format',
-                    'Quality Guidelines'
+                    'System Role & Context',
+                    'Task Definition & Objectives', 
+                    'Detailed Instructions & Constraints',
+                    'Output Format & Structure',
+                    'Quality Standards & Evaluation Criteria',
+                    'Examples & Edge Cases'
                 ],
                 rolePrompts: [
-                    'You are an expert assistant',
-                    'You are a professional consultant',
-                    'You are a knowledgeable specialist',
-                    'You are an experienced advisor'
-                ]
+                    'Act as an expert consultant with deep domain knowledge',
+                    'You are a senior specialist with 10+ years of experience',
+                    'Take on the role of a professional advisor and thought leader',
+                    'Function as an authoritative expert in your field'
+                ],
+                techniques: ['few-shot learning', 'chain-of-thought', 'structured reasoning']
             },
             writing: {
                 structure: [
-                    'Writing Role and Expertise',
-                    'Content Objective',
-                    'Target Audience',
-                    'Tone and Style',
-                    'Structure Requirements',
-                    'Length and Format'
+                    'Writing Expertise & Authority',
+                    'Content Goals & Success Metrics',
+                    'Audience Analysis & Personas',
+                    'Voice, Tone & Brand Guidelines',
+                    'Content Structure & Flow',
+                    'SEO & Distribution Strategy',
+                    'Quality Assurance & Editing'
                 ],
                 rolePrompts: [
-                    'You are an expert content writer',
-                    'You are a professional copywriter',
-                    'You are a skilled blogger',
-                    'You are an experienced journalist'
-                ]
+                    'You are a world-class content strategist and writer with expertise in [DOMAIN]',
+                    'Act as a senior copywriter who has crafted award-winning campaigns',
+                    'Take the role of an editorial director with deep audience insights',
+                    'Function as a content marketing expert with proven conversion expertise'
+                ],
+                techniques: ['storytelling framework', 'persuasion psychology', 'audience segmentation']
             },
             analysis: {
                 structure: [
-                    'Analytical Role',
-                    'Subject Matter',
-                    'Analysis Framework',
-                    'Key Areas to Examine',
-                    'Output Structure',
-                    'Evidence Requirements'
+                    'Analytical Authority & Methodology',
+                    'Problem Definition & Scope',
+                    'Analytical Framework & Models',
+                    'Data Sources & Evidence Standards',
+                    'Critical Thinking & Bias Mitigation',
+                    'Structured Output & Recommendations',
+                    'Confidence Levels & Limitations'
                 ],
                 rolePrompts: [
-                    'You are a data analyst',
-                    'You are a research specialist',
-                    'You are a strategic consultant',
-                    'You are an expert evaluator'
-                ]
+                    'You are a senior data scientist with expertise in [DOMAIN] analytics',
+                    'Act as a strategic consultant who provides C-level insights',
+                    'Take the role of a research director with methodological rigor',
+                    'Function as a critical thinking expert who evaluates evidence objectively'
+                ],
+                techniques: ['root cause analysis', 'comparative analysis', 'scenario modeling']
             },
             creative: {
                 structure: [
-                    'Creative Role',
-                    'Creative Brief',
-                    'Style and Inspiration',
-                    'Creative Constraints',
-                    'Output Specifications',
-                    'Innovation Guidelines'
+                    'Creative Authority & Vision',
+                    'Creative Brief & Objectives',
+                    'Inspiration Sources & References',
+                    'Creative Constraints & Parameters',
+                    'Innovation Methodology',
+                    'Output Specifications & Formats',
+                    'Iteration & Refinement Process'
                 ],
                 rolePrompts: [
-                    'You are a creative director',
-                    'You are an innovative designer',
-                    'You are a creative writer',
-                    'You are an artistic visionary'
-                ]
+                    'You are an award-winning creative director with breakthrough campaign experience',
+                    'Act as an innovative design thinking expert and creative strategist',
+                    'Take the role of a visionary artist who pushes creative boundaries',
+                    'Function as a creative catalyst who generates original, compelling ideas'
+                ],
+                techniques: ['design thinking', 'lateral thinking', 'creative constraints', 'divergent ideation']
             },
             code: {
                 structure: [
-                    'Programming Role',
-                    'Technical Requirements',
-                    'Programming Language/Framework',
-                    'Code Standards',
-                    'Documentation Requirements',
-                    'Testing Considerations'
+                    'Technical Authority & Expertise',
+                    'Requirements Analysis & Specification',
+                    'Architecture & Design Patterns',
+                    'Implementation Standards & Best Practices',
+                    'Code Quality & Security Standards',
+                    'Testing Strategy & Validation',
+                    'Documentation & Maintainability'
                 ],
                 rolePrompts: [
-                    'You are a senior software engineer',
-                    'You are a programming expert',
-                    'You are a technical architect',
-                    'You are a code review specialist'
-                ]
+                    'You are a principal software engineer with deep expertise in [TECHNOLOGY]',
+                    'Act as a senior technical architect who designs scalable systems',
+                    'Take the role of a code quality expert and security specialist',
+                    'Function as a technical lead who mentors and reviews production code'
+                ],
+                techniques: ['clean code principles', 'test-driven development', 'code review standards']
             },
             research: {
                 structure: [
-                    'Research Role',
-                    'Research Objective',
-                    'Methodology',
-                    'Sources and References',
-                    'Analysis Framework',
-                    'Presentation Format'
+                    'Research Authority & Credentials',
+                    'Research Objectives & Hypotheses',
+                    'Methodology & Research Design',
+                    'Source Evaluation & Validation',
+                    'Data Collection & Analysis',
+                    'Findings & Evidence Synthesis',
+                    'Limitations & Future Research'
                 ],
                 rolePrompts: [
-                    'You are a research scientist',
-                    'You are an academic researcher',
-                    'You are a market analyst',
-                    'You are an investigative specialist'
-                ]
+                    'You are a distinguished research scientist with published expertise in [FIELD]',
+                    'Act as a senior academic researcher with methodological expertise',
+                    'Take the role of a strategic research analyst with industry insights',
+                    'Function as an investigative researcher who uncovers deep insights'
+                ],
+                techniques: ['systematic review', 'meta-analysis', 'evidence hierarchy', 'peer review standards']
             }
         };
 
         this.commonInstructions = {
-            clarity: 'Be clear, concise, and well-organized in your response.',
-            accuracy: 'Ensure all information is accurate and up-to-date.',
-            examples: 'Provide relevant examples when appropriate.',
-            structure: 'Use proper headings, bullet points, and formatting.',
-            comprehensive: 'Cover all important aspects of the topic.',
-            actionable: 'Make your recommendations practical and actionable.'
+            clarity: 'Provide crystal-clear, logically structured responses with zero ambiguity.',
+            accuracy: 'Ensure 100% factual accuracy with verifiable, current information.',
+            examples: 'Include specific, relevant examples that demonstrate key concepts.',
+            structure: 'Use hierarchical organization with clear sections, headers, and formatting.',
+            comprehensive: 'Address all aspects thoroughly while maintaining focus and relevance.',
+            actionable: 'Deliver concrete, implementable recommendations with clear next steps.',
+            reasoning: 'Show your thinking process and justify conclusions with evidence.',
+            constraints: 'Acknowledge limitations and specify assumptions explicitly.'
+        };
+
+        this.promptingTechniques = {
+            'chain-of-thought': 'Think step-by-step through the problem, showing your reasoning process.',
+            'few-shot': 'Provide 2-3 specific examples to illustrate the expected approach and format.',
+            'zero-shot': 'Solve the task using your knowledge without examples, focusing on clear instructions.',
+            'role-playing': 'Adopt a specific expert persona with relevant credentials and experience.',
+            'constraint-based': 'Work within specific limitations and requirements to optimize output.',
+            'iterative-refinement': 'Build upon initial responses through systematic improvement cycles.',
+            'structured-thinking': 'Break down complex problems into manageable components with clear frameworks.'
         };
 
         this.toneMapping = {
-            professional: 'Maintain a professional, formal tone throughout.',
-            casual: 'Use a conversational, approachable tone.',
-            friendly: 'Be warm, welcoming, and personable.',
-            authoritative: 'Demonstrate expertise with confidence.',
-            educational: 'Explain concepts clearly for learning purposes.',
-            persuasive: 'Use compelling arguments and evidence.',
-            technical: 'Use precise, technical language appropriate for experts.',
-            creative: 'Be imaginative and think outside the box.'
+            professional: 'Maintain executive-level professionalism with authoritative, polished communication.',
+            casual: 'Use conversational but intelligent tone, as if consulting with a knowledgeable colleague.',
+            friendly: 'Be warm and approachable while maintaining expertise and credibility.',
+            authoritative: 'Demonstrate deep expertise with confident, evidence-backed assertions.',
+            educational: 'Teach with clarity, using scaffolded explanations and progressive complexity.',
+            persuasive: 'Use compelling rhetoric, strong evidence, and logical argumentation.',
+            technical: 'Employ precise terminology and industry-standard language for expert audiences.',
+            creative: 'Think innovatively while balancing originality with practical feasibility.',
+            analytical: 'Apply rigorous logic, data-driven insights, and systematic evaluation.',
+            empathetic: 'Show understanding and emotional intelligence while providing solutions.'
         };
 
         this.formatMapping = {
@@ -262,135 +288,325 @@ class PromptEngine {
     }
 
     /**
-     * Build the structured prompt
+     * Build the structured prompt using advanced prompt engineering techniques
      */
     buildStructuredPrompt(processedInput, template, options) {
         const sections = [];
         
-        // 1. Role and Context Section
-        sections.push(this.buildRoleSection(template, processedInput, options));
+        // 1. System Role & Context Section (with domain expertise)
+        sections.push(this.buildEnhancedRoleSection(template, processedInput, options));
         
-        // 2. Task Description Section
-        sections.push(this.buildTaskSection(processedInput, options));
+        // 2. Task Definition & Objectives
+        sections.push(this.buildTaskDefinitionSection(processedInput, options));
         
-        // 3. Specific Instructions Section
-        sections.push(this.buildInstructionsSection(processedInput, options));
+        // 3. Methodology & Approach
+        sections.push(this.buildMethodologySection(template, processedInput, options));
         
-        // 4. Output Format Section
-        sections.push(this.buildFormatSection(options));
+        // 4. Detailed Instructions & Constraints
+        sections.push(this.buildDetailedInstructionsSection(processedInput, options));
         
-        // 5. Quality Guidelines Section
-        sections.push(this.buildQualitySection(processedInput, options));
+        // 5. Output Format & Structure
+        sections.push(this.buildEnhancedFormatSection(options, template));
         
-        // Combine all sections
+        // 6. Quality Standards & Evaluation Criteria
+        sections.push(this.buildQualityStandardsSection(processedInput, options));
+        
+        // 7. Examples & Edge Cases (when applicable)
+        sections.push(this.buildExamplesSection(processedInput, template, options));
+        
+        // 8. Validation & Success Metrics
+        sections.push(this.buildValidationSection(processedInput, options));
+        
+        // Combine all sections with proper spacing
         return sections.filter(section => section.length > 0).join('\n\n');
     }
 
     /**
-     * Build role and context section
+     * Build enhanced role section with domain expertise
      */
-    buildRoleSection(template, processedInput, options) {
+    buildEnhancedRoleSection(template, processedInput, options) {
         const rolePrompt = template.rolePrompts[Math.floor(Math.random() * template.rolePrompts.length)];
-        const context = options.audience ? ` Your audience consists of ${options.audience}.` : '';
+        const domain = this.extractDomain(processedInput.originalInput);
+        const enhancedRole = rolePrompt.replace('[DOMAIN]', domain).replace('[TECHNOLOGY]', domain).replace('[FIELD]', domain);
         
-        return `**Role & Context:**\n${rolePrompt} with deep expertise in the relevant field.${context} You understand the nuances and requirements for high-quality work in this domain.`;
+        let section = `## SYSTEM ROLE & EXPERTISE\n\n${enhancedRole}`;
+        
+        if (options.audience) {
+            section += `\n\n**Target Audience:** ${options.audience}`;
+            section += `\n**Communication Style:** Tailor your expertise and language to resonate with ${options.audience}.`;
+        }
+        
+        section += `\n\n**Authority Indicators:**`;
+        section += `\n• Deep domain knowledge with practical, real-world experience`;
+        section += `\n• Understanding of industry best practices and emerging trends`;
+        section += `\n• Ability to provide context-aware, nuanced insights`;
+        section += `\n• Track record of delivering high-impact, actionable solutions`;
+        
+        return section;
     }
 
     /**
-     * Build task description section
+     * Extract domain from user input
      */
-    buildTaskSection(processedInput, options) {
-        let taskDescription = `**Primary Task:**\n${processedInput.mainTask}`;
+    extractDomain(input) {
+        const domains = {
+            'marketing': ['marketing', 'campaign', 'brand', 'advertising', 'promotion'],
+            'technology': ['code', 'programming', 'software', 'tech', 'development', 'app'],
+            'business': ['strategy', 'business', 'revenue', 'profit', 'operations', 'management'],
+            'education': ['teach', 'learn', 'education', 'training', 'course', 'student'],
+            'content': ['content', 'writing', 'blog', 'article', 'copy', 'social media'],
+            'research': ['research', 'analysis', 'study', 'data', 'investigation'],
+            'design': ['design', 'creative', 'visual', 'ui', 'ux', 'graphics'],
+            'finance': ['finance', 'financial', 'money', 'investment', 'budget', 'economics']
+        };
+        
+        const lowerInput = input.toLowerCase();
+        for (const [domain, keywords] of Object.entries(domains)) {
+            if (keywords.some(keyword => lowerInput.includes(keyword))) {
+                return domain;
+            }
+        }
+        return 'your specialized field';
+    }
+
+    /**
+     * Build task definition section
+     */
+    buildTaskDefinitionSection(processedInput, options) {
+        let section = `## TASK DEFINITION & OBJECTIVES\n\n`;
+        
+        section += `**Primary Objective:**\n${processedInput.mainTask}\n\n`;
+        
+        // Add success criteria
+        section += `**Success Criteria:**\n`;
+        section += `• Delivers comprehensive solution that fully addresses the core objective\n`;
+        section += `• Maintains high quality standards throughout execution\n`;
+        section += `• Provides actionable insights and practical implementation guidance\n`;
+        
+        if (options.length) {
+            section += `• Meets target length specification of approximately ${options.length} words\n`;
+        }
         
         if (processedInput.keywords.length > 0) {
-            taskDescription += `\n\n**Key Focus Areas:**\n${processedInput.keywords.map(keyword => `• ${this.capitalizeFirstLetter(keyword)}`).join('\n')}`;
+            section += `\n**Key Focus Areas:**\n${processedInput.keywords.map(keyword => `• ${this.capitalizeFirstLetter(keyword)}`).join('\n')}`;
         }
         
         if (processedInput.impliedRequirements.length > 0) {
-            taskDescription += `\n\n**Specific Requirements:**\n${processedInput.impliedRequirements.map(req => `• ${req}`).join('\n')}`;
+            section += `\n\n**Specific Requirements:**\n${processedInput.impliedRequirements.map(req => `• ${req}`).join('\n')}`;
         }
         
-        return taskDescription;
+        // Add complexity and urgency context
+        section += `\n\n**Context Parameters:**\n`;
+        section += `• Complexity Level: ${processedInput.complexityLevel.charAt(0).toUpperCase() + processedInput.complexityLevel.slice(1)}\n`;
+        section += `• Priority Level: ${processedInput.urgencyLevel.charAt(0).toUpperCase() + processedInput.urgencyLevel.slice(1)}\n`;
+        
+        return section;
     }
 
     /**
-     * Build instructions section
+     * Build methodology section
      */
-    buildInstructionsSection(processedInput, options) {
-        const instructions = ['**Instructions:**'];
+    buildMethodologySection(template, processedInput, options) {
+        let section = `## METHODOLOGY & APPROACH\n\n`;
         
-        // Add tone-specific instructions
-        if (options.tone && this.toneMapping[options.tone.toLowerCase()]) {
-            instructions.push(`• ${this.toneMapping[options.tone.toLowerCase()]}`);
-        }
+        // Select appropriate technique
+        const techniques = template.techniques || ['structured-thinking'];
+        const selectedTechnique = techniques[Math.floor(Math.random() * techniques.length)];
         
-        // Add complexity-based instructions
+        section += `**Primary Methodology:** ${selectedTechnique.replace('-', ' ').toUpperCase()}\n`;
+        section += `${this.promptingTechniques[selectedTechnique]}\n\n`;
+        
+        section += `**Approach Framework:**\n`;
+        section += `• Begin with comprehensive analysis of the problem/opportunity\n`;
+        section += `• Apply systematic thinking and proven methodologies\n`;
+        section += `• Incorporate relevant best practices and industry standards\n`;
+        section += `• Validate recommendations against success criteria\n`;
+        section += `• Provide clear implementation roadmap\n\n`;
+        
         if (processedInput.complexityLevel === 'high') {
-            instructions.push('• Provide in-depth analysis with multiple perspectives');
-            instructions.push('• Include relevant background context and supporting details');
-        } else if (processedInput.complexityLevel === 'low') {
-            instructions.push('• Keep explanations simple and accessible');
-            instructions.push('• Focus on the most essential information');
+            section += `**Advanced Considerations:**\n`;
+            section += `• Address multiple perspectives and potential edge cases\n`;
+            section += `• Consider interdependencies and system-level impacts\n`;
+            section += `• Anticipate potential challenges and mitigation strategies\n`;
         }
         
-        // Add urgency-based instructions
-        if (processedInput.urgencyLevel === 'high') {
-            instructions.push('• Prioritize the most critical points first');
-            instructions.push('• Be direct and actionable in your recommendations');
-        }
-        
-        // Add common quality instructions
-        instructions.push('• Use clear, professional language throughout');
-        instructions.push('• Support key points with evidence or examples when relevant');
-        instructions.push('• Ensure logical flow and organization');
-        
-        return instructions.join('\n');
+        return section;
     }
 
     /**
-     * Build format section
+     * Build detailed instructions section
      */
-    buildFormatSection(options) {
-        const formatInstructions = ['**Output Format:**'];
+    buildDetailedInstructionsSection(processedInput, options) {
+        let section = `## DETAILED INSTRUCTIONS & CONSTRAINTS\n\n`;
+        
+        // Core behavioral instructions
+        section += `**Core Behavioral Guidelines:**\n`;
+        section += `${Object.values(this.commonInstructions).map(instruction => `• ${instruction}`).join('\n')}\n\n`;
+        
+        // Tone-specific instructions
+        if (options.tone && this.toneMapping[options.tone.toLowerCase()]) {
+            section += `**Communication Style:**\n• ${this.toneMapping[options.tone.toLowerCase()]}\n\n`;
+        }
+        
+        // Complexity-based instructions
+        section += `**Complexity Guidelines:**\n`;
+        if (processedInput.complexityLevel === 'high') {
+            section += `• Provide comprehensive analysis with multiple perspectives and scenarios\n`;
+            section += `• Include detailed background context and theoretical foundations\n`;
+            section += `• Address potential counterarguments and alternative approaches\n`;
+            section += `• Consider long-term implications and strategic considerations\n`;
+        } else if (processedInput.complexityLevel === 'low') {
+            section += `• Focus on essential information and key takeaways\n`;
+            section += `• Use accessible language and avoid unnecessary complexity\n`;
+            section += `• Prioritize practical, immediately actionable guidance\n`;
+            section += `• Provide clear, straightforward recommendations\n`;
+        } else {
+            section += `• Balance depth with accessibility for general audiences\n`;
+            section += `• Include sufficient detail without overwhelming complexity\n`;
+            section += `• Provide both overview and specific guidance as needed\n`;
+        }
+        
+        // Urgency-based prioritization
+        if (processedInput.urgencyLevel === 'high') {
+            section += `\n**Priority Framework:**\n`;
+            section += `• Lead with the most critical information and immediate actions\n`;
+            section += `• Organize content by impact and urgency\n`;
+            section += `• Provide quick-reference summaries for key decisions\n`;
+        }
+        
+        // Add specific constraints
+        section += `\n**Operational Constraints:**\n`;
+        section += `• Maintain factual accuracy and cite sources when making claims\n`;
+        section += `• Acknowledge limitations and assumptions explicitly\n`;
+        section += `• Avoid speculation without clearly labeling it as such\n`;
+        section += `• Focus on practical implementation over theoretical discussion\n`;
+        
+        return section;
+    }
+
+    /**
+     * Build enhanced format section
+     */
+    buildEnhancedFormatSection(options, template) {
+        let section = `## OUTPUT FORMAT & STRUCTURE\n\n`;
+        
+        section += `**Required Structure:**\n`;
         
         if (options.format && this.formatMapping[options.format.toLowerCase()]) {
-            formatInstructions.push(`• ${this.formatMapping[options.format.toLowerCase()]}`);
+            section += `• ${this.formatMapping[options.format.toLowerCase()]}\n`;
         } else {
-            formatInstructions.push('• Structure your response with clear headings and sections');
-            formatInstructions.push('• Use bullet points or numbered lists for clarity when appropriate');
+            section += `• Begin with executive summary or key takeaways\n`;
+            section += `• Organize content with hierarchical headings (H1, H2, H3)\n`;
+            section += `• Use bullet points, numbered lists, and tables for clarity\n`;
+            section += `• Include clear section breaks and logical flow\n`;
+            section += `• End with actionable next steps or conclusions\n`;
         }
         
         if (options.length) {
             const lengthNum = parseInt(options.length);
             if (lengthNum) {
-                formatInstructions.push(`• Target approximately ${lengthNum} words in your response`);
+                section += `\n**Length Specification:**\n• Target ${lengthNum} words (±10% acceptable)\n`;
+                section += `• Prioritize quality over exact word count\n`;
+                section += `• Include word count at end: [Word Count: XXX]\n`;
             }
         }
         
-        formatInstructions.push('• Use proper formatting to enhance readability');
+        section += `\n**Formatting Standards:**\n`;
+        section += `• Use **bold** for key terms and section headers\n`;
+        section += `• Use *italics* for emphasis and important concepts\n`;
+        section += `• Include relevant examples in > blockquotes when helpful\n`;
+        section += `• Use code formatting for technical terms when applicable\n`;
+        section += `• Ensure consistent spacing and visual hierarchy\n`;
         
-        return formatInstructions.join('\n');
+        return section;
     }
 
     /**
-     * Build quality guidelines section
+     * Build quality standards section
      */
-    buildQualitySection(processedInput, options) {
-        const guidelines = [
-            '**Quality Standards:**',
-            '• Ensure accuracy and relevance in all content',
-            '• Maintain consistency in tone and style throughout',
-            '• Provide actionable insights and practical value'
-        ];
+    buildQualityStandardsSection(processedInput, options) {
+        let section = `## QUALITY STANDARDS & EVALUATION CRITERIA\n\n`;
+        
+        section += `**Excellence Benchmarks:**\n`;
+        section += `• **Accuracy:** 100% factual correctness with verifiable sources\n`;
+        section += `• **Relevance:** Direct alignment with stated objectives and audience needs\n`;
+        section += `• **Completeness:** Comprehensive coverage of all critical aspects\n`;
+        section += `• **Clarity:** Crystal-clear communication with zero ambiguity\n`;
+        section += `• **Actionability:** Practical, implementable recommendations\n`;
+        section += `• **Value:** Delivers meaningful insights that justify the investment\n\n`;
         
         if (processedInput.complexityLevel === 'high') {
-            guidelines.push('• Demonstrate deep understanding of complex concepts');
-            guidelines.push('• Address potential counterarguments or limitations');
+            section += `**Advanced Quality Criteria:**\n`;
+            section += `• Demonstrate sophisticated analysis and nuanced understanding\n`;
+            section += `• Address potential edge cases and alternative scenarios\n`;
+            section += `• Provide strategic context and long-term implications\n`;
+            section += `• Include risk assessment and mitigation strategies\n\n`;
         }
         
-        guidelines.push('• Review for clarity, coherence, and completeness before responding');
+        section += `**Validation Checkpoints:**\n`;
+        section += `• Content serves the primary objective effectively\n`;
+        section += `• Communication style matches target audience needs\n`;
+        section += `• Recommendations are feasible and well-supported\n`;
+        section += `• Structure enhances understanding and usability\n`;
+        section += `• Output meets all specified format and length requirements\n`;
         
-        return guidelines.join('\n');
+        return section;
+    }
+
+    /**
+     * Build examples section
+     */
+    buildExamplesSection(processedInput, template, options) {
+        if (processedInput.complexityLevel === 'low') {
+            return ''; // Skip examples for simple tasks
+        }
+        
+        let section = `## EXAMPLES & REFERENCE POINTS\n\n`;
+        
+        section += `**Response Framework Example:**\n`;
+        section += `When addressing the core request, structure your response as follows:\n`;
+        section += `1. **Context Setting:** Brief overview of the situation/challenge\n`;
+        section += `2. **Analysis:** Key insights and considerations\n`;
+        section += `3. **Recommendations:** Specific, actionable next steps\n`;
+        section += `4. **Implementation:** How to execute the recommendations\n`;
+        section += `5. **Success Metrics:** How to measure effectiveness\n\n`;
+        
+        if (processedInput.complexityLevel === 'high') {
+            section += `**Quality Example:**\n`;
+            section += `> "Based on market analysis data from Q3 2024, implementing a customer retention strategy should focus on three key areas: (1) personalized communication touchpoints that increase engagement by 40%, (2) loyalty program optimization targeting high-value segments, and (3) predictive analytics to identify at-risk customers 60 days before churn probability peaks."\n\n`;
+        }
+        
+        return section;
+    }
+
+    /**
+     * Build validation section
+     */
+    buildValidationSection(processedInput, options) {
+        let section = `## VALIDATION & SUCCESS METRICS\n\n`;
+        
+        section += `**Before Responding, Verify:**\n`;
+        section += `• [ ] All requirements from the task definition are addressed\n`;
+        section += `• [ ] Response meets quality standards and evaluation criteria\n`;
+        section += `• [ ] Content is appropriate for specified audience and tone\n`;
+        section += `• [ ] Format and structure enhance readability and usability\n`;
+        section += `• [ ] Recommendations are actionable and well-supported\n\n`;
+        
+        if (options.length) {
+            section += `• [ ] Word count is within target range (${options.length} ±10%)\n`;
+        }
+        
+        section += `**Success Indicators:**\n`;
+        section += `• Reader can immediately understand the core message\n`;
+        section += `• Recommendations are specific enough to implement\n`;
+        section += `• Content provides genuine value and insights\n`;
+        section += `• Response would be considered authoritative by domain experts\n`;
+        section += `• Output fully satisfies the original request\n\n`;
+        
+        section += `**Final Check:**\n`;
+        section += `Review your complete response against these criteria before submitting. If any area falls short, revise accordingly to meet professional standards.`;
+        
+        return section;
     }
 
     /**
