@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Engineer</title>
+    
+    <!-- Material Design Lite CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title">
+                    <i class="material-icons">auto_awesome</i>
+                    AI Prompt Engineer
+                </span>
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+                    <button class="mdl-button mdl-js-button mdl-button--icon" id="history-btn" title="View History">
+                        <i class="material-icons">history</i>
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-button--icon" id="settings-btn" title="Settings">
+                        <i class="material-icons">settings</i>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <!-- Hero Section -->
+                <section class="hero-section">
+                    <div class="container">
+                        <h1 class="hero-title">Transform Simple Ideas into Powerful AI Prompts</h1>
+                        <p class="hero-subtitle">Just describe what you want in plain English, and we'll craft the perfect prompt for any AI model.</p>
+                    </div>
+                </section>
+
+                <!-- Main Content -->
+                <section class="main-content">
+                    <div class="container">
+                        <!-- Prompt Type Selection -->
+                        <div class="mdl-card mdl-shadow--4dp prompt-type-card">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">
+                                    <i class="material-icons">category</i>
+                                    Select Prompt Type
+                                </h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <div class="prompt-types">
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="type-general">
+                                        <input type="radio" id="type-general" class="mdl-radio__button" name="prompt-type" value="general" checked>
+                                        <span class="mdl-radio__label">General Task</span>
+                                    </label>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="type-writing">
+                                        <input type="radio" id="type-writing" class="mdl-radio__button" name="prompt-type" value="writing">
+                                        <span class="mdl-radio__label">Writing</span>
+                                    </label>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="type-analysis">
+                                        <input type="radio" id="type-analysis" class="mdl-radio__button" name="prompt-type" value="analysis">
+                                        <span class="mdl-radio__label">Analysis</span>
+                                    </label>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="type-creative">
+                                        <input type="radio" id="type-creative" class="mdl-radio__button" name="prompt-type" value="creative">
+                                        <span class="mdl-radio__label">Creative</span>
+                                    </label>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="type-code">
+                                        <input type="radio" id="type-code" class="mdl-radio__button" name="prompt-type" value="code">
+                                        <span class="mdl-radio__label">Programming</span>
+                                    </label>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="type-research">
+                                        <input type="radio" id="type-research" class="mdl-radio__button" name="prompt-type" value="research">
+                                        <span class="mdl-radio__label">Research</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Input Section -->
+                        <div class="mdl-card mdl-shadow--4dp input-card">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">
+                                    <i class="material-icons">edit</i>
+                                    Describe Your Task
+                                </h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-field">
+                                    <textarea class="mdl-textfield__input" type="text" rows="4" id="user-input" placeholder="Example: Write a blog post about sustainable living"></textarea>
+                                    <label class="mdl-textfield__label" for="user-input">Tell me what you want to accomplish...</label>
+                                </div>
+                                
+                                <!-- Additional Options -->
+                                <div class="options-section">
+                                    <h4>Additional Options</h4>
+                                    <div class="option-row">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" id="tone-input">
+                                            <label class="mdl-textfield__label" for="tone-input">Tone (e.g., professional, casual, friendly)</label>
+                                        </div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" id="audience-input">
+                                            <label class="mdl-textfield__label" for="audience-input">Target Audience</label>
+                                        </div>
+                                    </div>
+                                    <div class="option-row">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" id="format-input">
+                                            <label class="mdl-textfield__label" for="format-input">Output Format</label>
+                                        </div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="number" id="length-input">
+                                            <label class="mdl-textfield__label" for="length-input">Approximate Length (words)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <button class="mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="generate-btn">
+                                    <i class="material-icons">auto_awesome</i>
+                                    Generate Prompt
+                                </button>
+                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" id="clear-btn">
+                                    <i class="material-icons">clear</i>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Output Section -->
+                        <div class="mdl-card mdl-shadow--4dp output-card" id="output-card" style="display: none;">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">
+                                    <i class="material-icons">auto_awesome</i>
+                                    Generated AI Prompt
+                                </h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <div class="prompt-output" id="prompt-output"></div>
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <button class="mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="copy-btn">
+                                    <i class="material-icons">content_copy</i>
+                                    Copy Prompt
+                                </button>
+                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" id="save-btn">
+                                    <i class="material-icons">save</i>
+                                    Save to History
+                                </button>
+                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" id="regenerate-btn">
+                                    <i class="material-icons">refresh</i>
+                                    Regenerate
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- History Section -->
+                        <div class="mdl-card mdl-shadow--4dp history-card" id="history-card" style="display: none;">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">
+                                    <i class="material-icons">history</i>
+                                    Prompt History
+                                </h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <div class="history-list" id="history-list"></div>
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" id="clear-history-btn">
+                                    <i class="material-icons">delete_sweep</i>
+                                    Clear History
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored fab-new-prompt" id="fab-new-prompt" title="New Prompt">
+        <i class="material-icons">add</i>
+    </button>
+
+    <!-- Snackbar for notifications -->
+    <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+
+    <!-- Material Design Lite JS -->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/prompt-engine.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
