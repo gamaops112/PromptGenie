@@ -8,10 +8,12 @@ class PromptApp {
         this.promptEngine = new PromptEngine();
         this.currentPrompt = null;
         this.promptHistory = this.loadHistory();
+        this.currentTheme = this.loadTheme();
         
         this.initializeElements();
         this.bindEvents();
         this.initializeMDL();
+        this.applyStoredTheme();
         
         // Show welcome message on first visit
         if (this.promptHistory.length === 0) {
@@ -39,6 +41,13 @@ class PromptApp {
         this.historyBtn = document.getElementById('history-btn');
         this.clearHistoryBtn = document.getElementById('clear-history-btn');
         this.fabNewPrompt = document.getElementById('fab-new-prompt');
+        
+        // Theme elements
+        this.themeBtn = document.getElementById('theme-btn');
+        this.themeModalOverlay = document.getElementById('theme-modal-overlay');
+        this.themeModalClose = document.getElementById('theme-modal-close');
+        this.themeCancelBtn = document.getElementById('theme-cancel');
+        this.themeApplyBtn = document.getElementById('theme-apply');
         
         // Display elements
         this.outputCard = document.getElementById('output-card');
@@ -75,6 +84,19 @@ class PromptApp {
         
         // Floating Action Button
         this.fabNewPrompt.addEventListener('click', () => this.newPrompt());
+        
+        // Theme management
+        this.themeBtn.addEventListener('click', () => this.openThemeModal());
+        this.themeModalClose.addEventListener('click', () => this.closeThemeModal());
+        this.themeCancelBtn.addEventListener('click', () => this.closeThemeModal());
+        this.themeApplyBtn.addEventListener('click', () => this.applyTheme());
+        
+        // Close modal when clicking overlay
+        this.themeModalOverlay.addEventListener('click', (e) => {
+            if (e.target === this.themeModalOverlay) {
+                this.closeThemeModal();
+            }
+        });
         
         // Real-time validation
         this.userInput.addEventListener('input', () => this.validateInput());
@@ -650,6 +672,121 @@ class PromptApp {
             console.log(`${type.toUpperCase()}: ${message}`);
             alert(message);
         }
+    }
+
+    // Theme Management Methods
+
+    /**
+     * Load theme from localStorage
+     */
+    loadTheme() {
+        try {
+            return localStorage.getItem('promptApp_theme') || 'indigo';
+        } catch (error) {
+            console.error('Failed to load theme:', error);
+            return 'indigo';
+        }
+    }
+
+    /**
+     * Save theme to localStorage
+     */
+    saveTheme(theme) {
+        try {
+            localStorage.setItem('promptApp_theme', theme);
+            this.currentTheme = theme;
+        } catch (error) {
+            console.error('Failed to save theme:', error);
+        }
+    }
+
+    /**
+     * Apply stored theme on page load
+     */
+    applyStoredTheme() {
+        this.setTheme(this.currentTheme);
+        
+        // Set the radio button to match current theme
+        const themeRadio = document.querySelector(`input[name="theme"][value="${this.currentTheme}"]`);
+        if (themeRadio) {
+            themeRadio.checked = true;
+        }
+    }
+
+    /**
+     * Set theme
+     */
+    setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        this.currentTheme = theme;
+        
+        // Update theme icon based on current theme
+        const themeIcon = this.themeBtn.querySelector('.material-icons');
+        if (theme === 'dark') {
+            themeIcon.textContent = 'brightness_4';
+        } else {
+            themeIcon.textContent = 'palette';
+        }
+    }
+
+    /**
+     * Open theme selection modal
+     */
+    openThemeModal() {
+        // Set current theme as selected
+        const currentThemeRadio = document.querySelector(`input[name="theme"][value="${this.currentTheme}"]`);
+        if (currentThemeRadio) {
+            currentThemeRadio.checked = true;
+        }
+        
+        // Show modal
+        this.themeModalOverlay.style.display = 'flex';
+        // Trigger reflow before adding show class for animation
+        this.themeModalOverlay.offsetHeight;
+        this.themeModalOverlay.classList.add('show');
+        
+        // Upgrade MDL components in modal
+        this.upgradeMDL();
+    }
+
+    /**
+     * Close theme selection modal
+     */
+    closeThemeModal() {
+        this.themeModalOverlay.classList.remove('show');
+        setTimeout(() => {
+            this.themeModalOverlay.style.display = 'none';
+        }, 300); // Match transition duration
+    }
+
+    /**
+     * Apply selected theme
+     */
+    applyTheme() {
+        const selectedTheme = document.querySelector('input[name="theme"]:checked');
+        if (selectedTheme) {
+            const theme = selectedTheme.value;
+            this.setTheme(theme);
+            this.saveTheme(theme);
+            this.showSuccess(`Theme changed to ${this.getThemeName(theme)}`);
+        }
+        
+        this.closeThemeModal();
+    }
+
+    /**
+     * Get friendly theme name
+     */
+    getThemeName(theme) {
+        const themeNames = {
+            'indigo': 'Indigo (Default)',
+            'blue': 'Blue Ocean',
+            'green': 'Forest Green',
+            'purple': 'Royal Purple',
+            'orange': 'Sunset Orange',
+            'dark': 'Dark Mode'
+        };
+        return themeNames[theme] || theme;
     }
 }
 

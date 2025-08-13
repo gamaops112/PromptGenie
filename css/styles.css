@@ -1,6 +1,7 @@
-/* Material Design Custom Styles */
+/* Material Design Custom Styles with Theme Support */
 
 :root {
+    /* Default Indigo Theme */
     --primary-color: #3f51b5;
     --primary-dark: #303f9f;
     --primary-light: #c5cae9;
@@ -13,6 +14,63 @@
     --background-color: #fafafa;
     --surface-color: #ffffff;
     --error-color: #f44336;
+    --success-color: #4caf50;
+}
+
+/* Blue Ocean Theme */
+[data-theme="blue"] {
+    --primary-color: #2196f3;
+    --primary-dark: #1976d2;
+    --primary-light: #bbdefb;
+    --accent-color: #ff9800;
+    --accent-dark: #f57c00;
+    --accent-light: #ffcc02;
+}
+
+/* Forest Green Theme */
+[data-theme="green"] {
+    --primary-color: #4caf50;
+    --primary-dark: #388e3c;
+    --primary-light: #c8e6c9;
+    --accent-color: #ff5722;
+    --accent-dark: #d84315;
+    --accent-light: #ff8a65;
+}
+
+/* Royal Purple Theme */
+[data-theme="purple"] {
+    --primary-color: #9c27b0;
+    --primary-dark: #7b1fa2;
+    --primary-light: #e1bee7;
+    --accent-color: #ffeb3b;
+    --accent-dark: #fbc02d;
+    --accent-light: #fff59d;
+}
+
+/* Sunset Orange Theme */
+[data-theme="orange"] {
+    --primary-color: #ff9800;
+    --primary-dark: #f57c00;
+    --primary-light: #ffe0b2;
+    --accent-color: #e91e63;
+    --accent-dark: #c2185b;
+    --accent-light: #f8bbd9;
+}
+
+/* Dark Mode Theme */
+[data-theme="dark"] {
+    --primary-color: #bb86fc;
+    --primary-dark: #3700b3;
+    --primary-light: #cf6679;
+    --accent-color: #03dac6;
+    --accent-dark: #018786;
+    --accent-light: #80e5d9;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --divider-color: #444444;
+    --background-color: #121212;
+    --surface-color: #1e1e1e;
+    --error-color: #cf6679;
     --success-color: #4caf50;
 }
 
@@ -406,6 +464,174 @@ body {
         --text-primary: #000000;
         --text-secondary: #404040;
         --divider-color: #808080;
+    }
+}
+
+/* Theme Selection Dialog Styles */
+.theme-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+}
+
+.theme-option {
+    margin: 0;
+    padding: 16px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-option:hover {
+    background-color: rgba(0,0,0,0.05);
+    border-color: var(--primary-color);
+}
+
+.theme-option .mdl-radio__label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.theme-preview {
+    display: flex;
+    width: 80px;
+    height: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.theme-color-primary,
+.theme-color-accent {
+    flex: 1;
+    height: 100%;
+}
+
+/* Theme Preview Colors */
+.indigo-theme .theme-color-primary { background-color: #3f51b5; }
+.indigo-theme .theme-color-accent { background-color: #ff4081; }
+
+.blue-theme .theme-color-primary { background-color: #2196f3; }
+.blue-theme .theme-color-accent { background-color: #ff9800; }
+
+.green-theme .theme-color-primary { background-color: #4caf50; }
+.green-theme .theme-color-accent { background-color: #ff5722; }
+
+.purple-theme .theme-color-primary { background-color: #9c27b0; }
+.purple-theme .theme-color-accent { background-color: #ffeb3b; }
+
+.orange-theme .theme-color-primary { background-color: #ff9800; }
+.orange-theme .theme-color-accent { background-color: #e91e63; }
+
+.dark-theme .theme-color-primary { background-color: #bb86fc; }
+.dark-theme .theme-color-accent { background-color: #03dac6; }
+
+/* Theme Modal Styling */
+.theme-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.theme-modal-overlay.show {
+    opacity: 1;
+}
+
+.theme-modal {
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    min-width: 400px;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.20);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.theme-modal-overlay.show .theme-modal {
+    transform: scale(1);
+}
+
+.theme-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--divider-color);
+}
+
+.theme-modal-header h4 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.theme-modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.theme-modal-close:hover {
+    background-color: rgba(0,0,0,0.1);
+    color: var(--text-primary);
+}
+
+.theme-modal-content {
+    padding: 20px 24px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.theme-modal-actions {
+    padding: 16px 24px;
+    border-top: 1px solid var(--divider-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* Responsive Theme Modal */
+@media (max-width: 600px) {
+    .theme-modal {
+        min-width: 90vw;
+        margin: 5vh;
+    }
+    
+    .theme-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .theme-modal-header {
+        padding: 16px 20px 12px;
+    }
+    
+    .theme-modal-content {
+        padding: 16px 20px;
+    }
+    
+    .theme-modal-actions {
+        padding: 12px 20px;
     }
 }
 
