@@ -86,10 +86,26 @@ class PromptApp {
         this.fabNewPrompt.addEventListener('click', () => this.newPrompt());
         
         // Theme management
-        this.themeBtn.addEventListener('click', () => this.openThemeModal());
-        this.themeModalClose.addEventListener('click', () => this.closeThemeModal());
-        this.themeCancelBtn.addEventListener('click', () => this.closeThemeModal());
-        this.themeApplyBtn.addEventListener('click', () => this.applyTheme());
+        if (this.themeBtn) {
+            this.themeBtn.addEventListener('click', () => {
+                console.log('Theme button clicked');
+                this.openThemeModal();
+            });
+        } else {
+            console.error('Theme button not found');
+        }
+        
+        if (this.themeModalClose) {
+            this.themeModalClose.addEventListener('click', () => this.closeThemeModal());
+        }
+        
+        if (this.themeCancelBtn) {
+            this.themeCancelBtn.addEventListener('click', () => this.closeThemeModal());
+        }
+        
+        if (this.themeApplyBtn) {
+            this.themeApplyBtn.addEventListener('click', () => this.applyTheme());
+        }
         
         // Close modal when clicking overlay
         this.themeModalOverlay.addEventListener('click', (e) => {
@@ -733,6 +749,14 @@ class PromptApp {
      * Open theme selection modal
      */
     openThemeModal() {
+        console.log('openThemeModal called');
+        console.log('themeModalOverlay:', this.themeModalOverlay);
+        
+        if (!this.themeModalOverlay) {
+            console.error('Theme modal overlay not found');
+            return;
+        }
+        
         // Set current theme as selected
         const currentThemeRadio = document.querySelector(`input[name="theme"][value="${this.currentTheme}"]`);
         if (currentThemeRadio) {
@@ -744,6 +768,8 @@ class PromptApp {
         // Trigger reflow before adding show class for animation
         this.themeModalOverlay.offsetHeight;
         this.themeModalOverlay.classList.add('show');
+        
+        console.log('Modal should be visible now');
         
         // Upgrade MDL components in modal
         this.upgradeMDL();
